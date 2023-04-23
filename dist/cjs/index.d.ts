@@ -1,2 +1,2 @@
-import FaceLogin from "./components/FaceLogin";
+import FaceLogin from './components/FaceLogin';
 export { FaceLogin };
