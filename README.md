@@ -44,6 +44,6 @@ root.render(
 [npm-image]: https://img.shields.io/npm/v/face-guardian
 [github-license]: https://img.shields.io/github/license/Cyvid7-Darus10/face-guardian-npm
 [github-license-url]: https://github.com/Cyvid7-Darus10/face-guardian-npm/blob/main/LICENSE
-[github-build]: https://github.com/Cyvid7-Darus10/face-guardian-npm/actions/workflows/publish.yml/badge.svg
+[github-build]: https://github.com/Cyvid7-Darus10/face-guardian-npm/actions/workflows/npm-publish.yml/badge.svg
 [github-build-url]: https://github.com/Cyvid7-Darus10/face-guardian-npm/actions/workflows/npm-publish.yml
 [npm-typescript]: https://img.shields.io/npm/types/face-guardian
