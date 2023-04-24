@@ -24,20 +24,31 @@ yarn add -D face-guardian
 Add `FaceLogin` to your component:
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { FaceLogin } from 'face-guardian'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { useFaceRecognition } from 'face-guardian';
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
-root.render(
+const App = () => {
+  const { FaceLogin, message, user } = useFaceRecognition();
+
+  return (
     <React.StrictMode>
-        <div>
-            <h2>Face Guardian</h2>
-            <FaceLogin />
-        </div>
-    </React.StrictMode>,
-)
+      <div>
+        <h2>Face Guardian</h2>
+        <FaceLogin />
+        <p>Message: {message}</p>
+        <p>User: {user}</p>
+      </div>
+      <hr />
+      <div>
+        <FaceLogin />
+      </div>
+    </React.StrictMode>
+  );
+};
 
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+root.render(<App />);
 ```
 
 [npm-url]: https://www.npmjs.com/package/face-guardian

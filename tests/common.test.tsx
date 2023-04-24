@@ -1,12 +1,22 @@
+// tests/useFaceRecognition.test.js
 import * as React from 'react';
 import { render } from '@testing-library/react';
+import { useFaceRecognition } from '../src';
 
-import 'jest-canvas-mock';
+const TestComponent = () => {
+  const { FaceLogin, user, message } = useFaceRecognition();
 
-import { FaceLogin } from '../src';
+  return (
+    <div>
+      <FaceLogin />
+      <p>{user}</p>
+      <p>{message}</p>
+    </div>
+  );
+};
 
 describe('Common render', () => {
-  it('renders without crashing', () => {
-    render(<FaceLogin />);
+  it('renders FaceLogin component and user, message', () => {
+    render(<TestComponent />);
   });
 });

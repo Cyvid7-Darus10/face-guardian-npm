@@ -1,3 +1,3 @@
-import FaceLogin from './components/FaceLogin';
+import useFaceRecognition from './components/useFaceRecognition';
 
-export { FaceLogin };
+export { useFaceRecognition };
