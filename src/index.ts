@@ -1,3 +1,4 @@
 import FaceLogin from './components/FaceLogin';
+import useUserData from './components/useUserData';
 
-export default FaceLogin;
+export { FaceLogin, useUserData };

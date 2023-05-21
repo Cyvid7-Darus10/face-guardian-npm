@@ -1,15 +1,28 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import FaceLogin from 'face-guardian';
+import ReactDOM from 'react-dom';
+import { FaceLogin, useUserData } from 'face-guardian';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <div>
-      <h2>Face Guardian</h2>
-      <FaceLogin appId="6d30891b-50de-401e-8dc2-b5af36a24b94" />
-    </div>
-  </React.StrictMode>
-);
+const App = () => {
+  const userData = useUserData();
+
+  return (
+    <React.StrictMode>
+      <div>
+        <h2>Face Guardian</h2>
+        <FaceLogin
+          appId="6ba4b716-dcb0-4493-8e02-c405071c80aa"
+          buttonStyles={{ background: 'blue', fontSize: '20px' }}
+          buttonText="Login with Face Guardian"
+        />
+        {userData && (
+          <div>
+            <h2>User Data:</h2>
+            <pre>{JSON.stringify(userData, null, 2)}</pre>
+          </div>
+        )}
+      </div>
+    </React.StrictMode>
+  );
+};
+
+ReactDOM.render(<App />, document.getElementById('root'));

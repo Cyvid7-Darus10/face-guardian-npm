@@ -26,7 +26,7 @@ const FaceLogin: React.FC<FaceLoginProps> = ({
 
     if (authorizationCode) {
       // Call API with authorization code
-      fetch('https://www.face-guardian.com/api/request_token', {
+      fetch('https://www.face-guardian.com/api/request-token', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

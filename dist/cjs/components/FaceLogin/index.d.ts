@@ -1,6 +1,8 @@
-import React from 'react';
-declare const FaceLogin: React.FC<{
+import React, { CSSProperties } from 'react';
+type FaceLoginProps = {
     appId: string;
-    clientSecret: string;
-}>;
+    buttonStyles?: CSSProperties;
+    buttonText?: string;
+};
+declare const FaceLogin: React.FC<FaceLoginProps>;
 export default FaceLogin;

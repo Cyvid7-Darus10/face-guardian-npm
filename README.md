@@ -26,9 +26,11 @@ Add `FaceLogin` to your component:
 ```js
 import React from 'react';
 import ReactDOM from 'react-dom';
-import FaceLogin from 'face-guardian';
+import { FaceLogin, useUserData } from 'face-guardian';
 
 const App = () => {
+  const userData = useUserData();
+
   return (
     <React.StrictMode>
       <FaceLogin
@@ -36,6 +38,7 @@ const App = () => {
         buttonStyles={{ background: 'red', fontSize: '20px' }}
         buttonText="Custom Button Text"
       />
+      {userData && <div>Welcome, {userData.name}!</div>}
     </React.StrictMode>
   );
 };
@@ -43,6 +46,18 @@ const App = () => {
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(<App />);
 ```
+
+## Contributing
+
+We welcome contributions to the Face Guardian package! Please refer to our [Contributing Guidelines](https://github.com/Cyvid7-Darus10/face-guardian-npm/blob/main/CONTRIBUTING.md) for detailed information on how you can contribute.
+
+## Support
+
+If you're having trouble with the package, please open an issue on the [GitHub repository](https://github.com/Cyvid7-Darus10/face-guardian-npm/issues). We'll do our best to help you out.
+
+## License
+
+The Face Guardian package is open source software [licensed as MIT](https://github.com/Cyvid7-Darus10/face-guardian-npm/blob/main/LICENSE).
 
 [npm-url]: https://www.npmjs.com/package/face-guardian
 [npm-image]: https://img.shields.io/npm/v/face-guardian
