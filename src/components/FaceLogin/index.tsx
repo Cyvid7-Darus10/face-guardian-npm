@@ -36,12 +36,11 @@ const FaceLogin: React.FC<FaceLoginProps> = ({
         .then((data) => {
           // Save token in local storage
           localStorage.setItem('token', data.token);
+          if (redirectUrl) {
+            window.location.href = redirectUrl;
+          }
         })
         .catch((err) => console.error(err));
-    }
-
-    if (redirectUrl) {
-      window.location.href = redirectUrl;
     }
   }, []);
 
