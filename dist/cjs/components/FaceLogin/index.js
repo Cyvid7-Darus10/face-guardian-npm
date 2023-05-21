@@ -26,10 +26,10 @@ var FaceLogin = function (_a) {
                 .then(function (data) {
                 // Save token in local storage
                 localStorage.setItem('token', data.token);
+                if (redirectUrl) {
+                    window.location.href = redirectUrl;
+                }
             })["catch"](function (err) { return console.error(err); });
-        }
-        if (redirectUrl) {
-            window.location.href = redirectUrl;
         }
     }, []);
     var defaultStyles = {
