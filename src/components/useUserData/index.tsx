@@ -4,13 +4,6 @@ const useUserData = () => {
   const [userData, setUserData] = useState<any>(null);
 
   useEffect(() => {
-    // Check if user data already exists in local storage
-    const existingUserData = localStorage.getItem('userData');
-    if (existingUserData) {
-      setUserData(JSON.parse(existingUserData));
-      return;
-    }
-
     // Get token from local storage
     const token = localStorage.getItem('token');
 
@@ -25,8 +18,6 @@ const useUserData = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          // Save user data to local storage and state
-          localStorage.setItem('userData', JSON.stringify(data));
           setUserData(data);
         })
         .catch((err) => console.error(err));
