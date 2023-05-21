@@ -1,6 +1,5 @@
 import { __assign } from "tslib";
 import React, { useEffect } from 'react';
-import Cookies from 'js-cookie';
 var FaceLogin = function (_a) {
     var appId = _a.appId, buttonStyles = _a.buttonStyles, _b = _a.buttonText, buttonText = _b === void 0 ? 'Face Guardian' : _b;
     var currentUrl = window.location.href;
@@ -23,8 +22,8 @@ var FaceLogin = function (_a) {
             })
                 .then(function (response) { return response.json(); })
                 .then(function (data) {
-                // Save token in cookie
-                Cookies.set('token', data.token);
+                // Save token in local storage
+                localStorage.setItem('token', data.token);
             })["catch"](function (err) { return console.error(err); });
         }
         if (redirectUrl) {

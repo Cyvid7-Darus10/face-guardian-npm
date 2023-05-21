@@ -1,5 +1,4 @@
 import React, { CSSProperties, useEffect } from 'react';
-import Cookies from 'js-cookie';
 
 type FaceLoginProps = {
   appId: string;
@@ -35,8 +34,8 @@ const FaceLogin: React.FC<FaceLoginProps> = ({
       })
         .then((response) => response.json())
         .then((data) => {
-          // Save token in cookie
-          Cookies.set('token', data.token);
+          // Save token in local storage
+          localStorage.setItem('token', data.token);
         })
         .catch((err) => console.error(err));
     }

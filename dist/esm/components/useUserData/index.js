@@ -17,7 +17,7 @@ var useUserData = function () {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': "Bearer ".concat(token)
+                    Authorization: "Bearer ".concat(token)
                 }
             })
                 .then(function (response) { return response.json(); })
