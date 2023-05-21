@@ -1,63 +1,71 @@
-import React, { useState, useEffect } from 'react';
+import React, { CSSProperties, useEffect } from 'react';
+import Cookies from 'js-cookie';
 
-const FaceLogin: React.FC<{ appId: string; clientSecret: string }> = ({
+type FaceLoginProps = {
+  appId: string;
+  buttonStyles?: CSSProperties;
+  buttonText?: string;
+};
+
+const FaceLogin: React.FC<FaceLoginProps> = ({
   appId,
-  clientSecret,
+  buttonStyles,
+  buttonText = 'Face Guardian',
 }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    const authenticate = async () => {
-      try {
-        const response = await fetch(
-          'https://www.face-guardian.com/api/authenticate',
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ appId, clientSecret }),
-          }
-        );
-
-        if (response.status) {
-          setIsAuthenticated(true);
-        } else {
-          console.error('Authentication failed');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
-
-    authenticate();
-  }, [appId, clientSecret]);
+  const currentUrl = window.location.href;
 
   const handleButtonClick = () => {
-    if (isAuthenticated) {
-      window.location.href = 'https://www.face-guardian.com/authenticate';
-    }
+    window.location.href = `https://www.face-guardian.com/login?appId=${appId}&redirectUrl=${currentUrl}`;
   };
 
+  useEffect(() => {
+    // Check for authorization code in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const authorizationCode = urlParams.get('authorizationCode');
+    const redirectUrl = urlParams.get('redirectUrl');
+
+    if (authorizationCode) {
+      // Call API with authorization code
+      fetch('https://www.face-guardian.com/api/request_token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ authorizationCode }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // Save token in cookie
+          Cookies.set('token', data.token);
+        })
+        .catch((err) => console.error(err));
+    }
+
+    if (redirectUrl) {
+      window.location.href = redirectUrl;
+    }
+  }, []);
+
+  const defaultStyles: CSSProperties = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    background: '#9fdbfd',
+    border: '1px solid #5f9cbf',
+    borderRadius: '5px',
+    padding: '10px',
+    color: '#ddf3ff',
+    fontSize: '16px',
+    fontWeight: 600,
+    cursor: 'pointer',
+  };
+
+  const combinedStyles = { ...defaultStyles, ...buttonStyles };
+
   return (
-    <button
-      onClick={handleButtonClick}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: '#9fdbfd',
-        border: '1px solid #5f9cbf',
-        borderRadius: '5px',
-        padding: '10px',
-        color: '#ddf3ff',
-        fontSize: '16px',
-        fontWeight: '600',
-        cursor: isAuthenticated ? 'pointer' : 'not-allowed',
-        opacity: isAuthenticated ? 1 : 0.5,
-      }}
-      disabled={!isAuthenticated}
-    >
-      Face Guardian
+    <button onClick={handleButtonClick} style={combinedStyles}>
+      {buttonText}
     </button>
   );
 };
