@@ -10,7 +10,7 @@ const FaceLogin: React.FC<{ appId: string; clientSecret: string }> = ({
     const authenticate = async () => {
       try {
         const response = await fetch(
-          'https://face-guardian.com/api/authenticate',
+          'https://www.face-guardian.com/api/authenticate',
           {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
