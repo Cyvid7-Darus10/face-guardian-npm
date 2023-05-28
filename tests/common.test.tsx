@@ -6,7 +6,7 @@ const TestComponent = () => {
   return (
     <div>
       <FaceLogin
-        appId="6ba4b716-dcb0-4493-8e02-c405071c80aa"
+        appId="c6574956-1a75-46a1-94be-aeebe5716458"
         buttonText="Test Login"
         buttonStyles={{ color: 'red' }}
       />
