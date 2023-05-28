@@ -11,7 +11,8 @@ const FaceLogin: React.FC<FaceLoginProps> = ({
   buttonStyles,
   buttonText = 'Face Guardian',
 }) => {
-  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+  const isClient = typeof window !== 'undefined';
+  const currentUrl = isClient ? window.location.href : '';
 
   const handleButtonClick = () => {
     if (typeof window !== 'undefined') {
@@ -76,11 +77,13 @@ const FaceLogin: React.FC<FaceLoginProps> = ({
       style={combinedStyles}
       disabled={!appId}
     >
-      <img
-        src="https://i.ibb.co/sthHtZP/fg-logo.webp"
-        alt="Face Guardian Logo"
-        style={{ marginRight: '10px', height: '24px', width: '24px' }}
-      />
+      {isClient && (
+        <img
+          src="https://i.ibb.co/sthHtZP/fg-logo.webp"
+          alt="Face Guardian Logo"
+          style={{ marginRight: '10px', height: '24px', width: '24px' }}
+        />
+      )}
       {buttonText}
     </button>
   );
