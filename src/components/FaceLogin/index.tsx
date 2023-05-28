@@ -50,23 +50,37 @@ const FaceLogin: React.FC<FaceLoginProps> = ({
 
   const defaultStyles: CSSProperties = {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     background: '#9fdbfd',
-    border: '1px solid #5f9cbf',
     borderRadius: '5px',
     padding: '10px',
-    color: '#ddf3ff',
+    color: '#ffffff',
     fontSize: '16px',
     fontWeight: 600,
     cursor: 'pointer',
+    width: '100%',
+    gap: '2px',
+    border: 'none',
+    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
+    transition: '0.3s',
+    outline: 'none',
   };
 
   const combinedStyles = { ...defaultStyles, ...buttonStyles };
 
   return (
-    <button onClick={handleButtonClick} style={combinedStyles}>
+    <button
+      onClick={handleButtonClick}
+      style={combinedStyles}
+      disabled={!appId}
+    >
+      <img
+        src="https://i.ibb.co/sthHtZP/fg-logo.webp"
+        alt="Face Guardian Logo"
+        style={{ marginRight: '10px', height: '24px', width: '24px' }}
+      />
       {buttonText}
     </button>
   );

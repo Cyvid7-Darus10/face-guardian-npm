@@ -1,6 +1,6 @@
 {
   "name": "face-guardian",
-  "version": "1.1.7",
+  "version": "1.2.0",
   "description": "Face Guardian Components",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
