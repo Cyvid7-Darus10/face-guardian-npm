@@ -11,36 +11,40 @@ const FaceLogin: React.FC<FaceLoginProps> = ({
   buttonStyles,
   buttonText = 'Face Guardian',
 }) => {
-  const currentUrl = window.location.href;
+  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
 
   const handleButtonClick = () => {
-    window.location.href = `https://www.face-guardian.com/login?appId=${appId}&redirectUrl=${currentUrl}`;
+    if (typeof window !== 'undefined') {
+      window.location.href = `https://www.face-guardian.com/login?appId=${appId}&redirectUrl=${currentUrl}`;
+    }
   };
 
   useEffect(() => {
-    // Check for authorization code in URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const authorizationCode = urlParams.get('authorizationCode');
-    const redirectUrl = urlParams.get('redirectUrl');
+    if (typeof window !== 'undefined') {
+      // Check for authorization code in URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const authorizationCode = urlParams.get('authorizationCode');
+      const redirectUrl = urlParams.get('redirectUrl');
 
-    if (authorizationCode) {
-      // Call API with authorization code
-      fetch('https://www.face-guardian.com/api/request-token', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ authorizationCode }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          // Save token in local storage
-          localStorage.setItem('token', data.token);
-          if (redirectUrl) {
-            window.location.href = redirectUrl;
-          }
+      if (authorizationCode) {
+        // Call API with authorization code
+        fetch('https://www.face-guardian.com/api/request-token', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ authorizationCode }),
         })
-        .catch((err) => console.error(err));
+          .then((response) => response.json())
+          .then((data) => {
+            // Save token in local storage
+            localStorage.setItem('token', data.token);
+            if (redirectUrl) {
+              window.location.href = redirectUrl;
+            }
+          })
+          .catch((err) => console.error(err));
+      }
     }
   }, []);
 
