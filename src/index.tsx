@@ -19,7 +19,7 @@ const App = () => {
                 <hr />
                 <div>
                     <h3>Face Guardian Login Button Component</h3>
-                    <FaceLogin appId="6ba4b716-dcb0-4493-8e02-c405071c80aa" />
+                    <FaceLogin appId="c6574956-1a75-46a1-94be-aeebe5716458" />
                     {userData && (
                         <div>
                             <h2>User Data:</h2>
