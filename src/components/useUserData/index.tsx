@@ -9,7 +9,7 @@ const useUserData = () => {
 
     // Fetch user data if token exists
     if (token) {
-      fetch('https://www.face-guardian.com/api/get-user', {
+      fetch('https://www.face-guardian.vercel.app/api/get-user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

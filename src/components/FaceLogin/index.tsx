@@ -16,7 +16,7 @@ const FaceLogin: React.FC<FaceLoginProps> = ({
 
   const handleButtonClick = () => {
     if (typeof window !== 'undefined') {
-      window.location.href = `https://www.face-guardian.com/login?appId=${appId}&redirectUrl=${currentUrl}`;
+      window.location.href = `https://www.face-guardian.vercel.app/login?appId=${appId}&redirectUrl=${currentUrl}`;
     }
   };
 
@@ -29,7 +29,7 @@ const FaceLogin: React.FC<FaceLoginProps> = ({
 
       if (authorizationCode) {
         // Call API with authorization code
-        fetch('https://www.face-guardian.com/api/request-token', {
+        fetch('https://www.face-guardian.vercel.app/api/request-token', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
