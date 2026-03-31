@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
+import { STORAGE_KEY } from '../FaceLogin';
+
+type UserData = Record<string, unknown>;
 
 const useUserData = () => {
-  const [userData, setUserData] = useState<any>(null);
+  const [userData, setUserData] = useState<UserData | null>(null);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    // Get token from local storage
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem(STORAGE_KEY);
 
-    // Fetch user data if token exists
     if (token) {
       fetch('https://www.face-guardian.vercel.app/api/get-user', {
         method: 'POST',
@@ -16,15 +18,22 @@ const useUserData = () => {
           Authorization: `Bearer ${token}`,
         },
       })
-        .then((response) => response.json())
-        .then((data) => {
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Failed to fetch user data: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data: UserData) => {
           setUserData(data);
         })
-        .catch((err) => console.error(err));
+        .catch((err) => {
+          setError(err instanceof Error ? err : new Error(String(err)));
+        });
     }
   }, []);
 
-  return userData;
+  return { userData, error };
 };
 
 export default useUserData;

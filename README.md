@@ -29,7 +29,7 @@ import ReactDOM from 'react-dom';
 import { FaceLogin, useUserData } from 'face-guardian';
 
 const App = () => {
-  const userData = useUserData();
+  const { userData, error } = useUserData();
 
   return (
     <React.StrictMode>
@@ -37,7 +37,9 @@ const App = () => {
         appId="your-app-id"
         buttonStyles={{ background: 'red', fontSize: '20px' }}
         buttonText="Custom Button Text"
+        onError={(err) => console.error('Login failed:', err)}
       />
+      {error && <div>Error: {error.message}</div>}
       {userData && <div>Welcome, {userData.name}!</div>}
     </React.StrictMode>
   );
@@ -46,6 +48,26 @@ const App = () => {
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(<App />);
 ```
+
+## Props
+
+### FaceLogin
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `appId` | `string` | *required* | Your Face Guardian application ID |
+| `buttonStyles` | `CSSProperties` | `undefined` | Custom styles to override the default button styling |
+| `buttonText` | `string` | `'Face Guardian'` | Text displayed on the login button |
+| `onError` | `(error: Error) => void` | `undefined` | Callback invoked when authentication fails |
+
+### useUserData
+
+Returns an object with:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `userData` | `Record<string, unknown> \| null` | The authenticated user's data, or `null` if not logged in |
+| `error` | `Error \| null` | Error object if fetching user data failed, or `null` |
 
 ## Contributing
 

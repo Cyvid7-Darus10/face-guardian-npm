@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import { FaceLogin, useUserData } from 'face-guardian';
 
 const App = () => {
-  const userData = useUserData();
+  const { userData } = useUserData();
 
   return (
     <React.StrictMode>
       <div>
         <h2>Face Guardian</h2>
         <FaceLogin
-          appId="c6574956-1a75-46a1-94be-aeebe5716458"
+          appId="your-app-id-here"
           buttonStyles={{ background: 'blue', fontSize: '20px' }}
           buttonText="Login with Face Guardian"
         />
